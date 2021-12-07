@@ -1,0 +1,325 @@
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+//ربنا أكرم من أي حد
+//Jerry&Tom
+//O_SOFTWARE
+//هو انا هحل؟انتو بتوعي وانا بتعاكوو يتهدوني يهدكو
+void omar()
+{
+ios::sync_with_stdio(0);
+cin.tie(0);
+
+}
+struct node
+{
+    int data;
+    struct node*next;
+}*head,*temp,*prevnode,*nextnode,*current;
+class linked_list
+{
+public:
+    linked_list()
+    {
+        head=NULL;
+    }
+    void createnode(int value);
+    void insertnode(int value);
+    void insert_begin(int value);
+    void insert_end(int value);
+    void insert_pos(int pos,int value);
+    void delete_begin() ;
+    void delete_end() ;
+    void delete_pos(int pos);
+     void reverse();
+    void getlength();
+    void display();
+
+
+};
+
+void linked_list::createnode(int value)
+{
+    struct node*newnode;
+    newnode=new node();
+    newnode->data=value;
+    newnode->next=NULL;
+
+}
+//****************************************************
+void linked_list::insertnode(int value)
+{
+     struct node*newnode;
+     newnode = new node();
+
+       newnode->data = value;
+         newnode->next;
+
+    if (head == NULL)
+    {
+         head=temp=newnode;
+    }
+
+  else
+   {
+    temp->next=newnode;
+       temp=newnode;
+
+   }
+}
+//****************************************************
+void linked_list::insert_begin(int value)
+{
+     struct node*newnode;
+    newnode=new node();
+    if(newnode==NULL)
+    {
+        cout<<"THE LINKED LIST IS EMPTY"<<endl;
+
+    }
+    else
+    {
+       newnode->data = value;
+        newnode->next = head;
+
+        head = newnode;
+
+    }
+
+}
+//****************************************************
+void linked_list::insert_end(int value)
+{
+    struct node*newnode;
+    newnode=new node();
+    if(newnode==NULL)
+    {
+        cout<<"THE LINKED LIST IS EMPTY"<<endl;
+
+    }
+    else
+    {
+       newnode->data = value;
+        newnode->next = NULL;
+
+        temp=head;
+        while(temp->next!=0)
+        {
+            temp=temp->next;
+        }
+        temp->next=newnode;
+
+    }
+
+}
+//****************************************************
+void linked_list::insert_pos(int pos,int value)
+{
+    struct node*newnode;
+    newnode=new node();
+    if(newnode==NULL)
+    {
+        cout<<"THE LINKED LIST IS EMPTY"<<endl;
+
+    }
+    else
+    {
+        int i=1;
+    newnode->data = value;
+        newnode->next = NULL;
+        temp=head;
+        for(int i=2;i<pos-1;i++)
+        {
+            temp=temp->next;
+            if(temp==NULL)
+                break;
+        }
+        if(temp!=NULL)
+        {
+            newnode->next = temp->next;
+            temp->next = newnode;
+        }
+        else
+        {
+             cout<<"UNABLE TO INSERT DATA AT THE GIVEN POSITION"<<endl;
+        }
+
+    }
+
+}
+//****************************************************
+void linked_list::delete_begin()
+{
+     struct node *newnode;
+    newnode= new node();
+
+
+if(newnode == NULL)
+    {
+        cout<<"Unable to allocate memory.\n";
+    }
+    else
+    {
+        temp=head;
+        head=head->next;
+        delete temp;
+    }
+}
+//****************************************************
+void linked_list::delete_end()
+{
+    struct node *newnode;
+    newnode= new node();
+
+
+if(newnode == NULL)
+    {
+        cout<<"Unable to allocate memory.\n";
+    }
+    else
+    {
+        temp=head;
+        while(temp->next!=0)
+        {
+            prevnode=temp;
+            temp=temp->next;
+
+        }
+        if(head==temp)
+        {
+            head=0;
+            delete temp;
+        }
+        else
+        {
+         prevnode->next=0;
+        delete temp;
+        }
+    }
+
+}
+//****************************************************
+void linked_list::delete_pos(int pos)
+{
+   int i=1;
+     struct node *newnode,*nextnode;
+    newnode= new node();
+
+
+if(newnode == NULL)
+    {
+        cout<<"Unable to allocate memory.\n";
+    }
+    else
+    {
+
+        temp=head;
+        while(i<pos-1)
+        {
+            temp=temp->next;
+            i++;
+        }
+         nextnode=temp->next;
+ temp->next=nextnode->next;
+ delete nextnode;
+
+    }
+}
+//****************************************************
+void linked_list::getlength()
+{
+     struct node *newnode;
+    newnode= new node();
+    int count=0;
+
+
+if(newnode == NULL)
+    {
+        cout<<count;
+    }
+    else
+    {
+
+        temp=head;
+        while(temp!=0)
+        {
+            count++;
+            temp=temp->next;
+
+        }
+cout<<count;
+       temp=head;
+    }
+}
+//****************************************************
+void linked_list::reverse()
+{
+     struct node *newnode;
+    int count=0;
+    newnode= new node();
+
+
+if(newnode == NULL)
+    {
+        cout<<count;
+    }
+    else
+    {
+    prevnode=0;
+   current=nextnode=head;
+     while(nextnode!=0)
+     {
+    nextnode=nextnode->next;
+  current->next=prevnode;
+    prevnode=current;
+      current=nextnode;
+      }
+
+    }
+    head=prevnode;
+     }
+
+//****************************************************
+void linked_list::display()
+{
+
+    temp=head;
+
+ while(temp!=0)
+ {
+     cout<<temp->data<<" ";
+     temp=temp->next;
+ }
+}
+//****************************************************
+int main()
+{
+linked_list ob;
+ob.insertnode(5);
+ob.insertnode(10);
+ob.insertnode(20);
+ob.insertnode(30);
+ob.display();
+cout<<endl;
+cout<<"the length of linked list is : "<<" ";
+ob.getlength();
+cout<<endl;
+cout<<"linked list after reverse :"<<endl;
+ob.reverse();
+ob.display();
+cout<<endl;
+cout<<"linked list after insert :"<<endl;
+ob.insert_begin(2);
+ob.insert_pos(2,3);
+ob.insert_end(4);
+ob.display();
+cout<<endl;
+cout<<"linked list after delete :"<<endl;
+ob.delete_begin();
+ob.delete_pos(2);
+ob.delete_end();
+ob.display();
+cout<<endl;
+
+    return 0;
+}
